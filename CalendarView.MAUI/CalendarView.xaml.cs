@@ -388,7 +388,7 @@ public partial class CalendarView : ContentView
                 }
                 for (int x = 0; x < 6; x++)
                 {
-                    DaysArray[i, x, y].IsVisible = columnVisible;
+                    DaysArray[i, x, y].IsVisible = DaysGrids[i].RowDefinitions.Count >= x + 1 && columnVisible;
                 }
             }
         }
