@@ -289,7 +289,6 @@ public partial class CalendarView : ContentView
             DaysGrids[1].TranslationX = 0;
             DaysGrids[2].TranslationX = monthWith;
         }
-        Debug.WriteLine($"Title={TitleGrid.Height} BaseStack={BaseGrid.Height} MonthsGrid={MonthsGrid.Height}");
     }
 
     private void OnPanUpdated(object sender, PanUpdatedEventArgs e)
@@ -490,7 +489,6 @@ public partial class CalendarView : ContentView
 
             monthIdx++;
         }
-        //BaseGrid.TranslationX = 0;
     }
     private void RefreshDay(CalendarDayView dayView, DateTime refreshMonth, bool ignoreSelectedDay = false)
     {

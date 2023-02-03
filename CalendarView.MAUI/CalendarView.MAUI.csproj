@@ -22,7 +22,25 @@
   <PropertyGroup>
     <PublishReadyToRun>false</PublishReadyToRun>
     <Description>A plugin for .NET MAUI providing a Calendar control to costume</Description>
+    <PackageProjectUrl>https://github.com/hjam40/Calendar.MAUI</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/hjam40/Calendar.MAUI</RepositoryUrl>
+    <PackageIcon>calendar.maui.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>csharp; dotnet; cross-platform; calendar; calendar-component; calendar-view;  plugin; maui; dotnet-maui;</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\Pictures\calendar.maui.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
   <ItemGroup>
     <MauiXaml Update="CalendarView.xaml">
       <Generator>MSBuild:Compile</Generator>
