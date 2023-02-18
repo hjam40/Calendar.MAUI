@@ -4,40 +4,36 @@
              x:Class="CalendarView.MAUI.CalendarView"
              x:Name="calendarView">
     <Border BindingContext="{x:Reference calendarView}" Style="{Binding BorderStyle}" HorizontalOptions="Fill" VerticalOptions="Fill">
-        <Grid x:Name="BaseGrid" BindingContext="{x:Reference calendarView}" HorizontalOptions="Fill" VerticalOptions="Fill">
+        <Grid x:Name="BaseGrid" HorizontalOptions="Fill" VerticalOptions="Fill">
             <Grid.RowDefinitions>
-                <RowDefinition Height="60"/>
+                <RowDefinition Height="40"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Grid x:Name="TitleGrid" BindingContext="{x:Reference calendarView}" HorizontalOptions="Fill" Grid.Row="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <HorizontalStackLayout x:Name="HeaderStack" BindingContext="{x:Reference calendarView}" 
-                                   Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7" 
-                                   HorizontalOptions="Fill" VerticalOptions="Fill"
-                                   Background="{Binding HeaderBackground}"/>
-                <StackLayout x:Name="PrevPathStk" BindingContext="{x:Reference calendarView}" IsVisible="{Binding ShowChangeMonthArrows}" HorizontalOptions="Start" VerticalOptions="Center" Margin="5,5,2,5" Grid.Row="0" Grid.Column="0">
-                    <Path x:Name="PrevPath" BindingContext="{x:Reference calendarView}" HorizontalOptions="Center" VerticalOptions="Center"
+            <VerticalStackLayout x:Name="BaseStk" Grid.Row="0">
+                <Grid x:Name="TitleGrid" BindingContext="{x:Reference calendarView}" HorizontalOptions="Fill" VerticalOptions="Start" Background="{Binding HeaderBackground}">
+                    <StackLayout x:Name="PrevPathStk" BindingContext="{x:Reference calendarView}" IsVisible="{Binding ShowChangeMonthArrows}" HorizontalOptions="Start" VerticalOptions="Center" Margin="5,5,2,5">
+                        <Path x:Name="PrevPath" BindingContext="{x:Reference calendarView}" HorizontalOptions="Center" VerticalOptions="Center"
                       Stroke="{Binding ButtonsColor}" Fill="{Binding ButtonsColor}" Scale="{Binding ButtonsScale}" />
-                </StackLayout>
-                <Label x:Name="MonthLabel" BindingContext="{x:Reference calendarView}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="5" Style="{Binding MonthStyle}" />
-                <StackLayout x:Name="NextPathStk" BindingContext="{x:Reference calendarView}" IsVisible="{Binding ShowChangeMonthArrows}" HorizontalOptions="End" VerticalOptions="Center" Margin="2,5,5,5" Grid.Row="0" Grid.Column="6">
-                    <Path x:Name="NextPath" BindingContext="{x:Reference calendarView}" HorizontalOptions="Center" VerticalOptions="Center"
+                    </StackLayout>
+                    <Label x:Name="MonthLabel" BindingContext="{x:Reference calendarView}" Style="{Binding MonthStyle}" />
+                    <StackLayout x:Name="NextPathStk" BindingContext="{x:Reference calendarView}" IsVisible="{Binding ShowChangeMonthArrows}" HorizontalOptions="End" VerticalOptions="Center" Margin="2,5,5,5">
+                        <Path x:Name="NextPath" BindingContext="{x:Reference calendarView}" HorizontalOptions="Center" VerticalOptions="Center"
                       Stroke="{Binding ButtonsColor}" Fill="{Binding ButtonsColor}" Scale="{Binding ButtonsScale}" />
-                </StackLayout>
-            </Grid>
+                    </StackLayout>
+                </Grid>
+                <Grid x:Name="DaysNameGrid" BindingContext="{x:Reference calendarView}" HorizontalOptions="Fill" VerticalOptions="Start">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </VerticalStackLayout>
             <Grid x:Name="MonthsGrid" Grid.Row="1" HorizontalOptions="Fill" VerticalOptions="Fill"/>
-       </Grid>
+        </Grid>
     </Border>
 </ContentView>

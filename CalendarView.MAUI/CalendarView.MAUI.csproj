@@ -30,6 +30,7 @@
     <PackageTags>csharp; dotnet; cross-platform; calendar; calendar-component; calendar-view;  plugin; maui; dotnet-maui;</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <Version>1.1.0</Version>
   </PropertyGroup>
   <ItemGroup>
     <None Include="..\..\..\..\Pictures\calendar.maui.png">

@@ -198,6 +198,7 @@ public partial class CalendarView : ContentView
     private bool animatingButton = false;
     private double monthWith = 0;
     private double columnMonthWith = 0;
+    private double headerHeight = 60;
 
     public CalendarView()
     {
@@ -216,7 +217,11 @@ public partial class CalendarView : ContentView
             MonthsGrid.Add(DaysGrids[i]);
         }
 
+        TitleGrid.SizeChanged += Control_SizeChanged;
+        DaysNameGrid.SizeChanged += Control_SizeChanged;
+        SizeChanged += Control_SizeChanged;
         MonthsGrid.SizeChanged += Control_SizeChanged;
+
         PanGestureRecognizer panGesture = new();
         panGesture.PanUpdated += OnPanUpdated;
         MonthsGrid.GestureRecognizers.Add(panGesture);
@@ -239,9 +244,8 @@ public partial class CalendarView : ContentView
         {
             DaysNamesArray[i] = new CalendarDayNameView { BindingContext = this };
             DaysNamesArray[i].SetBinding(StyleProperty, nameof(DayNameStyle));
-            Grid.SetRow(DaysNamesArray[i], 1);
             Grid.SetColumn(DaysNamesArray[i], i);
-            TitleGrid.Add(DaysNamesArray[i]);
+            DaysNameGrid.Add(DaysNamesArray[i]);
         }
         DaysNamesArray[0].SetBinding(StyleProperty, nameof(DayNameFirstDayOfWeekStyle));
         DaysNamesArray[6].SetBinding(StyleProperty, nameof(DayNameLastDayOfWeekStyle));
@@ -271,20 +275,16 @@ public partial class CalendarView : ContentView
 
     private void Control_SizeChanged(object sender, EventArgs e)
     {
-        if (MonthLabel.Height > 0 || PrevPath.Height > 0 || NextPath.Height > 0)
+        if (headerHeight != TitleGrid.Height + DaysNameGrid.Height && TitleGrid.Height + DaysNameGrid.Height > 0)
         {
-            TitleGrid.RowDefinitions[0].Height = Math.Max(Math.Max(MonthLabel.Height, PrevPath.Height), NextPath.Height) + 15;
+            headerHeight = TitleGrid.Height + DaysNameGrid.Height;
+            BaseGrid.RowDefinitions[0] = new RowDefinition(headerHeight);
         }
-        BaseGrid.MinimumWidthRequest = MonthLabel.Width + PrevPath.Width + NextPath.Width + 20;
-        
+
         if (MonthsGrid.Width > 0 && MonthsGrid.Width != monthWith)
         {
             monthWith = MonthsGrid.Width;
             columnMonthWith = monthWith / 7;
-            for (int i = 0; i < 3; i++)
-            {
-                DaysGrids[i].WidthRequest = monthWith;
-            }
             DaysGrids[0].TranslationX = -monthWith;
             DaysGrids[1].TranslationX = 0;
             DaysGrids[2].TranslationX = monthWith;
@@ -612,7 +612,7 @@ public partial class CalendarView : ContentView
     {
         if (!STYLESINITIATED)
         {
-            BORDERSTYLE.Setters.Add(MarginProperty, new Thickness(10));
+            BORDERSTYLE.Setters.Add(MarginProperty, new Thickness(5));
             BORDERSTYLE.Setters.Add(BackgroundProperty, Brush.Transparent);
 
             MONTHSTYLE.Setters.Add(HorizontalOptionsProperty, LayoutOptions.Center);
@@ -620,6 +620,7 @@ public partial class CalendarView : ContentView
             MONTHSTYLE.Setters.Add(Label.FontSizeProperty, 15d);
             MONTHSTYLE.Setters.Add(Label.FontAttributesProperty, FontAttributes.Bold);
             MONTHSTYLE.Setters.Add(Label.TextColorProperty, Colors.Black);
+            MONTHSTYLE.Setters.Add(MarginProperty, new Thickness(5));
 
             OTHERMONTHDAYSTYLE.Setters.Add(CalendarDayView.DayColorProperty, Colors.LightGrey);
             OTHERMONTHDAYSTYLE.Setters.Add(CalendarDayView.DayFontAttributesProperty, FontAttributes.Italic);
